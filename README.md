@@ -1,7 +1,7 @@
- ### Automação de Cadastro de Produtos Web
+# Automação de Cadastro de Produtos Web
 Este projeto demonstra a automação do processo de cadastro de produtos em um sistema web fictício, utilizando Python. O principal objetivo é otimizar tarefas repetitivas, inserindo dados de um arquivo CSV diretamente na interface do usuário de forma programática.
 
-  # Objetivo
+  ### Objetivo
 O objetivo central deste projeto é desenvolver uma solução de automação que seja capaz de:
 
 Abrir um navegador web e navegar para uma URL específica de login.
@@ -14,7 +14,7 @@ Inserir esses dados nos campos correspondentes de um formulário de cadastro de 
 
 Simular interações do usuário (cliques, digitação, pressionar teclas) para navegar e submeter os formulários.
 
-  # Funcionamento
+  ### Funcionamento
 O script Python opera de forma sequencial, simulando as ações de um usuário humano:
 
 Abertura e Navegação: Inicia o navegador Google Chrome, digita a URL do sistema de cadastro e navega até a página de login.
@@ -35,10 +35,10 @@ Pressiona ENTER para submeter o formulário de cadastro do produto.
 
 Rola a página para garantir que os próximos campos de cadastro estejam visíveis, preparando para o próximo item.
 
-  # Resultado
+  ### Resultado
 Ao final da execução, o script terá cadastrado todos os produtos listados no arquivo produtos.csv no sistema web, de forma rápida e autônoma, eliminando a necessidade de inserção manual e reduzindo erros. Isso demonstra o potencial da automação para agilizar processos e liberar o tempo do usuário para tarefas mais estratégicas.
 
-  # Ferramentas Utilizadas
+  ### Ferramentas Utilizadas
 Python: Linguagem de programação principal.
 
 pyautogui: Biblioteca Python utilizada para automação da interface gráfica (simulação de cliques do mouse, digitação de texto e pressionamento de teclas).
