@@ -1,94 +1,71 @@
 import pyautogui
 import time
-
-# pyautogui.click -> clicar em algum lugar 
-# pyautogui.press -> apretar uma tecla
-# pyautogui.write -> escrever um txt
-
-pyautogui.PAUSE = 0.5
-
-# paso 1: entrar no sistema da empresa 
-# abrir chrome 
-pyautogui.press("Win")
-pyautogui.write("chrome")
-pyautogui.press("enter")
-
-# espera 3 segundos
-time.sleep(2)
-
-# seleçao do usuario
-pyautogui.click(x=431, y=544)
-
-# digitar o site https://dlp.hashtagtreinamentos.com/python/intensivao/login
-pyautogui.write("https://dlp.hashtagtreinamentos.com/python/intensivao/login")
-pyautogui.press("enter")
-
-# espera 3 segundos
-time.sleep(3)
-
-# paso 2: fazer login 
-pyautogui.click(x=683, y=375)
-pyautogui.write("aguantechaca@gmail.com")
-
-# prencher a senha 
-pyautogui.press("tab")
-pyautogui.write("minhasenhasupersecreta")
-
-#botao logar
-pyautogui.press("tab")
-pyautogui.press("enter")
-
-# espera 3 segundos
-time.sleep(3)
-
-# paso 3: importar base de datos 
-
 import pandas
-tabela = pandas.read_csv("produtos.csv")
-print(tabela)
+import os
 
-# paso 4: cadastrar 1 produto
+# Configuração de pausa entre comandos do pyautogui
+def configurar_pyautogui():
+    pyautogui.PAUSE = 0.5
 
-for linha in tabela.index: # para cada linha da minha tabela 
-
-    pyautogui.click(x=475, y=259)
-
-    codigo = tabela.loc[linha, "codigo"]
-    pyautogui.write(codigo)
-
-    pyautogui.press("tab") # passar ao proximo campo 
-    marca = tabela.loc[linha, "marca"]
-    pyautogui.write(marca)
-
-    pyautogui.press("tab") # passar ao proximo campo 
-    tipo = tabela.loc[linha, "tipo"]
-    pyautogui.write(tipo)
-
-    pyautogui.press("tab") # passar ao proximo campo 
-    categoria = str(tabela.loc[linha, "categoria"])
-    pyautogui.write(categoria)
-
-    pyautogui.press("tab") # passar ao proximo campo 
-    preco_unitario = str(tabela.loc[linha, "preco_unitario"])
-    pyautogui.write(preco_unitario)
-
-    pyautogui.press("tab") # passar ao proximo campo 
-    custo = str(tabela.loc[linha, "custo"])
-    pyautogui.write(custo)
-
-    pyautogui.press("tab") # passar ao proximo campo 
-    obs = str(tabela.loc[linha, "obs"])
-
-    if obs != "nan":
-        pyautogui.write(obs)
-
-
-    pyautogui.press("tab") # passar ao proximo campo 
+# Passo 1: Entrar no sistema da empresa
+def abrir_navegador_e_acessar_site():
+    # Abrir o navegador Chrome
+    pyautogui.press("win")
+    pyautogui.write("chrome")
     pyautogui.press("enter")
+    time.sleep(3)  # Espera o Chrome abrir
+    # Seleção do usuário (ajuste as coordenadas conforme seu monitor)
+    pyautogui.click(x=747, y=720)
+    time.sleep(3)  # Espera o Navegador abrir 
+    # Digitar o site
+    pyautogui.write("https://dlp.hashtagtreinamentos.com/python/intensivao/login")
+    pyautogui.press("enter")
+    time.sleep(3)  # Espera o site carregar
 
-    # voltar no inicio
-    pyautogui.scroll(1000000)
+# Passo 2: Fazer login
+def fazer_login(email, senha):
+    pyautogui.click( x=874, y=471)
+    pyautogui.write(email)
+    pyautogui.press("tab")
+    pyautogui.write(senha)
+    pyautogui.press("tab")
+    pyautogui.press("enter")
+    time.sleep(3)  # Espera a tela carregar
 
+# Passo 3: Importar base de dados
+def importar_base_dados(caminho_csv):
+    tabela = pandas.read_csv(caminho_csv)
+    print(tabela)
+    return tabela
 
-# paso 5: repetir para todos os produtos
+# Passo 4: Cadastrar os produtos
+def cadastrar_produtos(tabela):
+    for linha in tabela.index:
+        pyautogui.click(x=475, y=259)  # Clique para iniciar o cadastro
+        pyautogui.write(str(tabela.loc[linha, "codigo"]))
+        pyautogui.press("tab")
+        pyautogui.write(str(tabela.loc[linha, "marca"]))
+        pyautogui.press("tab")
+        pyautogui.write(str(tabela.loc[linha, "tipo"]))
+        pyautogui.press("tab")
+        pyautogui.write(str(tabela.loc[linha, "categoria"]))
+        pyautogui.press("tab")
+        pyautogui.write(str(tabela.loc[linha, "preco_unitario"]))
+        pyautogui.press("tab")
+        pyautogui.write(str(tabela.loc[linha, "custo"]))
+        pyautogui.press("tab")
+        obs = str(tabela.loc[linha, "obs"])
+        if obs.lower() != "nan":
+            pyautogui.write(obs)
+        pyautogui.press("tab")
+        pyautogui.press("enter")  # Confirmar cadastro
+        pyautogui.scroll(1000000)  # Voltar ao início da página (opcional)
+
+if __name__ == "__main__":
+    os.chdir(r"C:\Users\nicor\OneDrive\Desktop\Proyectos Nico\copia de projeto hashtag 1")
+    configurar_pyautogui()
+    abrir_navegador_e_acessar_site()
+    fazer_login("aguantechaca@gmail.com", "minhasenhasupersecreta")
+    tabela = importar_base_dados("produtos.csv")
+    cadastrar_produtos(tabela)
 
