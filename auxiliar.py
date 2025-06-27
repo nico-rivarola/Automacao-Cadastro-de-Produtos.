@@ -1,5 +1,7 @@
 import pyautogui
 import time
-time.sleep(2)
+time.sleep(4)
 
-pyautogui.scroll(100000)
+
+x, y = pyautogui.position()
+print(f"Posição do mouse: x={x}, y={y}")
