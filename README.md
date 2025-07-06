@@ -1,50 +1,117 @@
-# Automação de Cadastro de Produtos Web
-Este projeto demonstra a automação do processo de cadastro de produtos em um sistema web fictício, utilizando Python. O principal objetivo é otimizar tarefas repetitivas, inserindo dados de um arquivo CSV diretamente na interface do usuário de forma programática.
+# 🤖 Automação de Cadastro de Produtos Web
 
-  ### Objetivo
-O objetivo central deste projeto é desenvolver uma solução de automação que seja capaz de:
+Automatize o cadastro de produtos em sistemas web com eficiência, segurança e escalabilidade! Este projeto utiliza **Python**, **Selenium** e **Pandas** para ler arquivos CSV e inserir dados automaticamente via interface web. Ideal para equipes que lidam com cadastros repetitivos em sistemas internos ou e-commerces.
 
-Abrir um navegador web e navegar para uma URL específica de login.
+---
 
-Realizar o login no sistema com credenciais pré-definidas.
+## 🚀 Funcionalidades
 
-Ler e processar dados de produtos a partir de um arquivo CSV.
+✅ Login automático no sistema web  
+✅ Leitura de produtos a partir de arquivos CSV  
+✅ Preenchimento de formulários com dados reais  
+✅ Submissão automática e iterativa de cadastros  
+✅ Registro de logs de execução  
+✅ Navegação segura entre campos  
+✅ Estrutura modular e escalável
 
-Inserir esses dados nos campos correspondentes de um formulário de cadastro de produtos na página web.
+---
 
-Simular interações do usuário (cliques, digitação, pressionar teclas) para navegar e submeter os formulários.
+## 🖥️ Pré-requisitos
 
-  ### Funcionamento
-O script Python opera de forma sequencial, simulando as ações de um usuário humano:
+- Python 3.8+
+- Google Chrome
+- ChromeDriver compatível com sua versão do navegador
 
-Abertura e Navegação: Inicia o navegador Google Chrome, digita a URL do sistema de cadastro e navega até a página de login.
+---
 
-Login Automatizado: Preenche os campos de e-mail e senha e clica no botão de login para acessar o sistema.
+## 1. ⚙️ Instalação
 
-Leitura de Dados: Carrega os dados dos produtos de um arquivo produtos.csv para uma estrutura de dados (DataFrame).
 
-Cadastro Iterativo: Para cada linha (produto) no arquivo CSV, o script executa os seguintes passos:
 
-Clica no campo inicial do formulário de cadastro.
+```bash
+git clone https://github.com/seu-usuario/automacao-cadastro-produtos.git
+cd automacao-cadastro-produtos 
+```
+## 2. Crie um ambiente virtual 
 
-Preenche cada campo do formulário (código, marca, tipo, categoria, preço unitário, custo e observações) com os dados da linha atual do CSV.
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+```
+## 3. Instale as dependências
+```bash
+pip install -r requirements.txt
+```
+## 4. Configure as credenciais e URL 
+ 
+  Crie um arquivo .env com: 
+ ```env
+ URL=https://sistema-ficticio.com/login
+EMAIL=seu_email@exemplo.com
+SENHA=sua_senha_secreta
+```
 
-Utiliza a tecla TAB para navegar entre os campos.
+## 📦 Estrutura do Projeto
+```bash 
+automacao-cadastro-produtos/
+│
+├── data/
+│   └── produtos.csv           # Arquivo com os produtos
+│
+├── src/
+│   └── cadastro.py            # Script principal
+│
+├── .env                       # Variáveis de ambiente
+├── requirements.txt           # Bibliotecas necessárias
+└── README.md
+```
+## 🛠️ Como Usar
+### Execute o script passando o caminho do CSV:
+```bash
+python src/cadastro.py --arquivo data/produtos.csv
+``` 
+Você verá logs informando o progresso de cada produto cadastrado.
+## 🧪 Exemplo de Arquivo CSV
+```csv
+codigo,marca,tipo,categoria,preco,custo,observacoes
+1234,Nike,Tênis,Esporte,299.90,150.00,Lançamento 2025
+5678,Adidas,Camiseta,Casual,99.90,50.00,Algodão orgânico
+```
 
-Pressiona ENTER para submeter o formulário de cadastro do produto.
+🧩 Tecnologias Utilizadas
 
-Rola a página para garantir que os próximos campos de cadastro estejam visíveis, preparando para o próximo item.
+    Python
 
-  ### Resultado
-Ao final da execução, o script terá cadastrado todos os produtos listados no arquivo produtos.csv no sistema web, de forma rápida e autônoma, eliminando a necessidade de inserção manual e reduzindo erros. Isso demonstra o potencial da automação para agilizar processos e liberar o tempo do usuário para tarefas mais estratégicas.
+    Selenium
 
-  ### Ferramentas Utilizadas
-Python: Linguagem de programação principal.
+    Pandas
 
-pyautogui: Biblioteca Python utilizada para automação da interface gráfica (simulação de cliques do mouse, digitação de texto e pressionamento de teclas).
+    python-dotenv
 
-pandas: Biblioteca Python utilizada para manipulação e leitura de dados de arquivos CSV.
+    ChromeDriver
+    
 
-time: Módulo padrão do Python para introduzir pausas (esperas) no fluxo da automação, garantindo que os elementos da página web sejam carregados antes das interações.
 
-Google Chrome: Navegador web utilizado como ambiente para a automação.
+
+---
+
+## 👤 Sobre mim
+
+Me chamo Nicolás, e sou apaixonado por análise de dados e machine learning.  
+Conecte-se comigo no LinkedIn clicando no botão abaixo! 👇
+
+<p align="center">
+  📬 Me adicione no <a href="https://www.linkedin.com/in/nicol%C3%A1s-rivarola-011223176/" target="_blank">LinkedIn</a> !
+</p>
+
+
+---
+
+
+⚠️ Avisos
+Este script simula ações humanas em páginas web. Certifique-se de que o uso está de acordo com as políticas da plataforma alvo.
+
+Não compartilhe arquivos .env com informações sensíveis.
+
+
