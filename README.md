@@ -23,60 +23,92 @@ Automatize o cadastro de produtos em sistemas web com eficiência, segurança e 
 - ChromeDriver compatível com sua versão do navegador
 
 ---
+## 🛠️ Como Usar
 
-## 1. ⚙️ Instalação
-
-
+## Passo 1 Instalação
 
 ```bash
 git clone https://github.com/seu-usuario/automacao-cadastro-produtos.git
 cd automacao-cadastro-produtos 
 ```
-## 2. Crie um ambiente virtual 
+## Passo 2 Configure os clicks acorde ao seu computador com auxiliar.py 
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
+import pyautogui
+import time
+time.sleep(4)
+
+
+x, y = pyautogui.position()
+print(f"Posição do mouse: x={x}, y={y}")
 ```
-## 3. Instale as dependências
+## Passo 3 Configuração de pausa entre comandos do pyautogui
+
 ```bash
-pip install -r requirements.txt
+def configurar_pyautogui():
+    pyautogui.PAUSE = 0.5
+
+  ```
+## Passo 4 Entrar no sistema da empresa
 ```
-## 4. Configure as credenciais e URL 
- 
-  Crie um arquivo .env com: 
- ```env
- URL=https://sistema-ficticio.com/login
-EMAIL=seu_email@exemplo.com
-SENHA=sua_senha_secreta
+def abrir_navegador_e_acessar_site():
+    # Abrir o navegador Chrome
+    pyautogui.press("win")
+    pyautogui.write("chrome")
+    pyautogui.press("enter")
+    time.sleep(3)  # Espera o Chrome abrir
+    # Seleção do usuário (ajuste as coordenadas conforme seu monitor)
+    pyautogui.click(x=747, y=720)
+    time.sleep(3)  # Espera o Navegador abrir 
+    # Digitar o site
+    pyautogui.write("https://dlp.hashtagtreinamentos.com/python/intensivao/login")
+    pyautogui.press("enter")
+    time.sleep(3)  # Espera o site carregar
 ```
 
-## 📦 Estrutura do Projeto
-```bash 
-automacao-cadastro-produtos/
-│
-├── data/
-│   └── produtos.csv           # Arquivo com os produtos
-│
-├── src/
-│   └── cadastro.py            # Script principal
-│
-├── .env                       # Variáveis de ambiente
-├── requirements.txt           # Bibliotecas necessárias
-└── README.md
+## Passo 5 Fazer login
 ```
-## 🛠️ Como Usar
-### Execute o script passando o caminho do CSV:
-```bash
-python src/cadastro.py --arquivo data/produtos.csv
-``` 
-Você verá logs informando o progresso de cada produto cadastrado.
-## 🧪 Exemplo de Arquivo CSV
-```csv
-codigo,marca,tipo,categoria,preco,custo,observacoes
-1234,Nike,Tênis,Esporte,299.90,150.00,Lançamento 2025
-5678,Adidas,Camiseta,Casual,99.90,50.00,Algodão orgânico
+  def fazer_login(email, senha):
+      pyautogui.click( x=874, y=471)
+      pyautogui.write(email)
+      pyautogui.press("tab")
+      pyautogui.write(senha)
+      pyautogui.press("tab")
+      pyautogui.press("enter")
+      time.sleep(3)  # Espera a tela carregar
+```
+
+## Passo 6 Importar base de dados
+```
+def importar_base_dados(caminho_csv):
+    tabela = pandas.read_csv(caminho_csv)
+    print(tabela)
+    return tabela
+```
+
+## Passo 7 Cadastrar os produtos
+```
+def cadastrar_produtos(tabela):
+    for linha in tabela.index:
+        pyautogui.click(x=475, y=259)  # Clique para iniciar o cadastro
+        pyautogui.write(str(tabela.loc[linha, "codigo"]))
+        pyautogui.press("tab")
+        pyautogui.write(str(tabela.loc[linha, "marca"]))
+        pyautogui.press("tab")
+        pyautogui.write(str(tabela.loc[linha, "tipo"]))
+        pyautogui.press("tab")
+        pyautogui.write(str(tabela.loc[linha, "categoria"]))
+        pyautogui.press("tab")
+        pyautogui.write(str(tabela.loc[linha, "preco_unitario"]))
+        pyautogui.press("tab")
+        pyautogui.write(str(tabela.loc[linha, "custo"]))
+        pyautogui.press("tab")
+        obs = str(tabela.loc[linha, "obs"])
+        if obs.lower() != "nan":
+            pyautogui.write(obs)
+        pyautogui.press("tab")
+        pyautogui.press("enter")  # Confirmar cadastro
+        pyautogui.scroll(1000000)  # Voltar ao início da página (opcional)
 ```
 
 🧩 Tecnologias Utilizadas
@@ -110,6 +142,12 @@ Conecte-se comigo no LinkedIn clicando no botão abaixo! 👇
 
 
 ⚠️ Avisos
+Este script simula ações humanas em páginas web. Certifique-se de que o uso está de acordo com as políticas da plataforma alvo.
+
+Não compartilhe arquivos .env com informações sensíveis.
+
+
+
 Este script simula ações humanas em páginas web. Certifique-se de que o uso está de acordo com as políticas da plataforma alvo.
 
 Não compartilhe arquivos .env com informações sensíveis.
