@@ -41,19 +41,29 @@ def importar_base_dados(caminho_csv):
 # Passo 4: Cadastrar os produtos
 def cadastrar_produtos(tabela):
     for linha in tabela.index:
-        pyautogui.click(x=475, y=259)  # Clique para iniciar o cadastro
+    pyautogui.click(x=475, y=259)  # Clique para iniciar o cadastro
+    time.sleep(1)  # Esperar que o campo está ativo
+ 
+    pyautogui.press("tab")
+
         pyautogui.write(str(tabela.loc[linha, "codigo"]))
         pyautogui.press("tab")
+
         pyautogui.write(str(tabela.loc[linha, "marca"]))
         pyautogui.press("tab")
+
         pyautogui.write(str(tabela.loc[linha, "tipo"]))
         pyautogui.press("tab")
+
         pyautogui.write(str(tabela.loc[linha, "categoria"]))
         pyautogui.press("tab")
+
         pyautogui.write(str(tabela.loc[linha, "preco_unitario"]))
         pyautogui.press("tab")
+
         pyautogui.write(str(tabela.loc[linha, "custo"]))
         pyautogui.press("tab")
+
         obs = str(tabela.loc[linha, "obs"])
         if obs.lower() != "nan":
             pyautogui.write(obs)
